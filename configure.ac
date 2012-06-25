@@ -1,19 +1,21 @@
 dn1 Process this file with autoconf to produce a configure script.
-AC_INIT([libcsv],[3.0.1],,,[http://libcsv.sourceforge.net/])
-
+AC_INIT([libcsv], [3.0.2], [rgamble@users.sourceforge.net],
+        [libcsv], [http://sourceforge.net/projects/libcsv/])
+	
 # Must come before AM_INIT_AUTOMAKE.
 AC_CONFIG_MACRO_DIR([m4])
-
-AM_INIT_AUTOMAKE([1.11 -Wall])
 
 # Minimum Autoconf version required.
 AC_PREREQ([2.65])
 
+AM_INIT_AUTOMAKE([1.11 -Wall foreign])
+
 AC_PROG_CC
 AC_PROG_CC_STDC   # check for ISO/C99 options for the compilers, if available. Be hip, don't be square.
-#AC_PROG_RANLIB
-AC_PROG_CXX
+
 LT_INIT
+
+AC_CONFIG_SRCDIR([libcsv.c])
 
 # Checks for header files.
 
@@ -25,6 +27,7 @@ AC_CHECK_FUNCS([strerror])
 AC_FUNC_MALLOC
 
 AC_CONFIG_FILES([Makefile])
+
 AC_OUTPUT
 
 

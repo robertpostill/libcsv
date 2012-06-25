@@ -8,7 +8,7 @@ extern "C" {
 #endif
 
 #define CSV_MAJOR 3
-#define CSV_MINOR 0
+#define CSV_MINOR 1
 #define CSV_RELEASE 0
 
 /* Error Codes */

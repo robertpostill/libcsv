@@ -64,3 +64,23 @@ libcsv version 3.0.0 released
   * Added functions to change the memory allocation functions used, get the
   size of the internal buffer, and get and set the size of the amount of
   memory requested when the internal buffer gets too large.
+
+Thu Apr 14 14:17:58 EDT 2011
+libcsv version 3.0.1 released
+  * This version includes a fix for a defect where using csv_parse in
+  conjunction with the CSV_APPEND_NULL flag could result in an extraneous
+  byte being added to the end of the data before the nul-terminator was added.
+  Thanks to Evan Miller for finding and reporting this issue.
+  * The -fPIC switch, which is needed for several platforms, is now
+  included in the Makefile.  If your compiler complains about this option,
+  try removing it or replacing it with the equivalent option to generate
+  position-independent code.
+
+Tue May  1 11:20:47 EDT 2012
+libcsv version 3.0.2 released
+  * This version addresses an issue encountered when parsing empty fields of
+  tab-delimited file (sourceforge Issue ID 3513234).
+  Thanks to Paul Fitzpatrick for reporting this and suggesting a fix.
+  * libcsv now contains a properly configured autotools build system.
+  Thanks to Christopher Howard <christopher.howard@frigidcode.com> who
+  did all of the legwork setting this up.
