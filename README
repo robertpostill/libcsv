@@ -1,16 +1,15 @@
 Installation
 ------------
 installation usually consists of:
-make && make test && make install
+./configure && make && make check && make install
 
 see the INSTALL file for details and instructions on other systems
 
 
 License
 -------
-The libcsv library is licensed under the LGPL, see the LICENSE file for details
-The example programs are licensed under the GPL, see the LICENSE file in the
-examples directory for details
+The libcsv library is licensed under the LGPL, see the COPYING.LESSER file for details.
+The example programs are not covered under a license and can be used without restriction.
 
 
 Documentation
