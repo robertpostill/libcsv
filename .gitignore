@@ -1,0 +1,22 @@
+
+*.bak
+*~
+*.o
+*.obj
+*.a
+*.la
+*.lo
+
+config.guess
+config.sub
+autom4te.cache/
+
+.deps/
+.libs/
+/Makefile
+config.log
+config.status
+/libtool
+
+# 'make distcheck' intermediates
+*.tar.gz
