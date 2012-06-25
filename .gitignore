@@ -1,22 +1,35 @@
 
+# Editor fallout
 *.bak
 *~
+
+# Compiled Object files
+*.slo
+*.lo
 *.o
 *.obj
-*.a
-*.la
-*.lo
 
+# Compiled Dynamic libraries
+*.so
+
+# Compiled Static libraries
+*.lai
+*.la
+*.a
+
+# autotooling meuk
 config.guess
 config.sub
 autom4te.cache/
-
-.deps/
-.libs/
-/Makefile
 config.log
 config.status
 /libtool
 
+# GCC letting it rip
+.deps/
+.libs/
+/Makefile
+
 # 'make distcheck' intermediates
 *.tar.gz
+
