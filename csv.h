@@ -9,7 +9,7 @@ extern "C" {
 
 #define CSV_MAJOR 3
 #define CSV_MINOR 1
-#define CSV_RELEASE 0
+#define CSV_RELEASE 1
 
 /* Error Codes */
 #define CSV_SUCCESS 0
@@ -25,7 +25,9 @@ extern "C" {
 #define CSV_STRICT_FINI 4 /* causes csv_fini to return CSV_EPARSE if last
                              field is quoted and doesn't containg ending 
                              quote */
-#define CSV_APPEND_NULL 8 /* Ensure that all fields are null-ternimated */
+#define CSV_APPEND_NULL 8 /* Ensure that all fields are null-terminated */
+#define CSV_EMPTY_IS_NULL 16 /* Pass null pointer to cb1 function when
+                                empty, unquoted fields are encountered */
 
 
 /* Character values */

@@ -84,3 +84,9 @@ libcsv version 3.0.2 released
   * libcsv now contains a properly configured autotools build system.
   Thanks to Christopher Howard <christopher.howard@frigidcode.com> who
   did all of the legwork setting this up.
+
+Wed Jan  9 19:07:20 EST 2013
+libcsv version 3.0.3 released
+  * This version includes a new option, CSV_EMPTY_IS_NULL, to distinguish
+  between empty, unquoted fields and quoted fields that contain no data.
+  Thanks to Artur Pyrogovskyi <artur.pyrogovskyi@gmail.com> for the suggestion.
