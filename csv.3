@@ -1,4 +1,4 @@
-.TH CSV 3 "26 July 2008"
+.TH CSV 3 "9 January 2013"
 .SH NAME
 csv \- CSV parser and writer library
 .SH SYNOPSIS
@@ -120,6 +120,10 @@ Causes unterminated quoted fields encountered in \fBcsv_fini()\fP to cause a par
 .TP
 \fBCSV_APPEND_NULL\fP
 Will cause all fields to be nul-terminated when provided to \fIcb1\fP, introduced in 3.0.0.
+.TP
+\fBCSV_EMPTY_IS_NULL\fP
+Will cause NULL to be passed as the first argument to \fIcb1\fP for empty, unquoted, fields.  Empty means consisting only of either spaces and tabs or the values defined by the a custom function registered via \fBcsv_set_space_func()\fP.  Added in 3.0.3.
+.PP
 .RE
 Multiple options can be specified by OR-ing them together.
 .PP

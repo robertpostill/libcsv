@@ -25,7 +25,7 @@ Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301  USA
 
 #include "csv.h"
 
-#define VERSION "3.0.2"
+#define VERSION "3.0.3"
 
 #define ROW_NOT_BEGUN           0
 #define FIELD_NOT_BEGUN         1
@@ -50,7 +50,9 @@ Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301  USA
      entry_pos -= spaces; \
    if (p->options & CSV_APPEND_NULL) \
      ((p)->entry_buf[entry_pos]) = '\0'; \
-   if (cb1) \
+   if (cb1 && (p->options & CSV_EMPTY_IS_NULL) && !quoted && entry_pos == 0) \
+     cb1(NULL, entry_pos, data); \
+   else if (cb1) \
      cb1(p->entry_buf, entry_pos, data); \
    pstate = FIELD_NOT_BEGUN; \
    entry_pos = quoted = spaces = 0; \

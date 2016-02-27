@@ -55,7 +55,11 @@ cb1 (void *data, size_t len, void *t)
     fail_parser(test_name, "actual data length doesn't match expected data length");
 
   /* Check the actual data against the expected data */
-  if (memcmp(event_ptr->data, data, len) != 0)
+  if ((event_ptr->data == NULL || data == NULL)) {
+    if (event_ptr->data != data)
+      fail_parser(test_name, "actual data doesn't match expected data");
+  }
+  else if (memcmp(event_ptr->data, data, len) != 0)
     fail_parser(test_name, "actual data doesn't match expected data");
 
   event_idx++;
@@ -238,6 +242,7 @@ int main (void) {
   char test16b_data[] = "\"1\",\"2\",\" 3 ";
   char test17_data[] = " a\0b\0c ";
   char test18_data[] = "12345678901234567890123456789012";
+  char test19_data[] = "  , \"\" ,";
 
   /* Custom tests */
   char custom01_data[] = "'''a;b''';;' '''' ';''''' ';' ''''';''''''";
@@ -398,6 +403,13 @@ int main (void) {
     { {CSV_COL, 0, 5, "a\0b\0c"},
       {CSV_ROW, -1, 1, NULL}, {CSV_END, 0, 0, NULL} };
 
+  /* Test CSV_EMPTY_IS_NULL */
+  struct event test19_results[] = 
+    { {CSV_COL, 0, 0, NULL},
+      {CSV_COL, 0, 0, ""},
+      {CSV_COL, 0, 0, NULL},
+      {CSV_ROW, -1, 1, NULL}, {CSV_END, 0, 0, NULL} };
+
   /* |'a;b'|| '' |'' | ''|''| */
   struct event custom01_results[] = 
     { {CSV_COL, 0, 5, "'a;b'"},
@@ -410,6 +422,7 @@ int main (void) {
 
   DO_TEST(01, 0);
   DO_TEST(01, CSV_STRICT);
+  DO_TEST(01, CSV_STRICT | CSV_EMPTY_IS_NULL);
   DO_TEST(02, 0);
   DO_TEST(02, CSV_STRICT);
   DO_TEST(03, 0);
@@ -425,10 +438,14 @@ int main (void) {
   DO_TEST(07b, CSV_STRICT);
   DO_TEST(08, 0);
   DO_TEST(09, 0);
+  DO_TEST(09, CSV_EMPTY_IS_NULL);
   DO_TEST(10, 0);
   DO_TEST(11, 0);
+  DO_TEST(11, CSV_EMPTY_IS_NULL);
   DO_TEST(12, 0);
+  DO_TEST(12, CSV_EMPTY_IS_NULL);
   DO_TEST(12b, CSV_REPALL_NL);
+  DO_TEST(12b, CSV_REPALL_NL | CSV_EMPTY_IS_NULL);
   DO_TEST(13, 0);
   DO_TEST(14, 0);
   DO_TEST(14, CSV_STRICT);
@@ -441,6 +458,8 @@ int main (void) {
   DO_TEST(16, CSV_STRICT);
   DO_TEST(17, 0);
   DO_TEST(17, CSV_STRICT);
+  DO_TEST(17, CSV_STRICT | CSV_EMPTY_IS_NULL);
+  DO_TEST(19, CSV_EMPTY_IS_NULL);
 
   DO_TEST_CUSTOM(01, 0, ';', '\'', NULL, NULL);
 
