@@ -168,7 +168,7 @@ csv_fini(struct csv_parser *p, void (*cb1)(void *, size_t, void *), void (*cb2)(
 
 
 
-  if (p->pstate == FIELD_BEGUN && p->quoted && p->options & CSV_STRICT && p->options & CSV_STRICT_FINI) {
+  if (p->pstate == FIELD_BEGUN && p->quoted && (p->options & CSV_STRICT) && (p->options & CSV_STRICT_FINI)) {
     /* Current field is quoted, no end-quote was seen, and CSV_STRICT_FINI is set */
     p->status = CSV_EPARSE;
     return -1;
