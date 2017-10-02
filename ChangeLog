@@ -33,7 +33,7 @@ libcsv version 1.0.1 released
 Fri Jun  1 11:18:28 EDT 2007
 libcsv version 2.0.0 released
   * This major release contains features that break binary compatibility with earlier libcsv versions.  The interface is backwards compatible with 1.x so existing programs only need to be recompiled to work with the new version, no source code modifications need to be made.
-  * Added csv_set_delim()/csv_get_delim() and csv_set_quote()/csv_get_quote() functions to set and get the field delimeter and quote characters respectively.  Thanks to Martin Ugarte <ugarte.m@gmail.com> for his input
+  * Added csv_set_delim()/csv_get_delim() and csv_set_quote()/csv_get_quote() functions to set and get the field delimiter and quote characters respectively.  Thanks to Martin Ugarte <ugarte.m@gmail.com> for his input
   * Added csv_set_space_func() and csv_set_term_func() functions that allow a user provided function to specify which characters should be considered spaces and line terminators respectively
   * Updated documentation to include new functions
   * Included FAQ document to answer common questions about using libcsv to solve specific problems
