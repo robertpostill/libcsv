@@ -7,7 +7,7 @@ On systems with make, the installation process consists of:
     make check
     make install
 
-You may need to run ldconfig or a similiar command before dynamically
+You may need to run ldconfig or a similar command before dynamically
 linking your program to libcsv.
 
 This will install the csv.h header, libcsv shared and static libraries,
