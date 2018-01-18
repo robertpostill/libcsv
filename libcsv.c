@@ -158,17 +158,17 @@ csv_free(struct csv_parser *p)
 int
 csv_fini(struct csv_parser *p, void (*cb1)(void *, size_t, void *), void (*cb2)(int c, void *), void *data)
 {
-  /* Finalize parsing.  Needed, for example, when file does not end in a newline */
+  if (p == NULL)
+	return -1;
+ /* Finalize parsing.  Needed, for example, when file does not end in a newline */
   int quoted = p->quoted;
   int pstate = p->pstate;
   size_t spaces = p->spaces;
   size_t entry_pos = p->entry_pos;
 
-  if (p == NULL)
-    return -1;
 
 
-  if (p->pstate == FIELD_BEGUN && p->quoted && p->options & CSV_STRICT && p->options & CSV_STRICT_FINI) {
+  if (p->pstate == FIELD_BEGUN && p->quoted && (p->options & CSV_STRICT) && (p->options & CSV_STRICT_FINI)) {
     /* Current field is quoted, no end-quote was seen, and CSV_STRICT_FINI is set */
     p->status = CSV_EPARSE;
     return -1;
@@ -451,12 +451,14 @@ csv_parse(struct csv_parser *p, const void *s, size_t len, void (*cb1)(void *, s
 size_t
 csv_write (void *dest, size_t dest_size, const void *src, size_t src_size)
 {
+  if (src == NULL)
+	return 0;
+
   unsigned char *cdest = dest;
   const unsigned char *csrc = src;
+
   size_t chars = 0;
 
-  if (src == NULL)
-    return 0;
 
   if (cdest == NULL)
     dest_size = 0;
@@ -488,10 +490,11 @@ csv_write (void *dest, size_t dest_size, const void *src, size_t src_size)
 int
 csv_fwrite (FILE *fp, const void *src, size_t src_size)
 {
-  const unsigned char *csrc = src;
 
   if (fp == NULL || src == NULL)
     return 0;
+
+  const unsigned char *csrc = src;
 
   if (fputc('"', fp) == EOF)
     return EOF;
@@ -517,12 +520,13 @@ csv_fwrite (FILE *fp, const void *src, size_t src_size)
 size_t
 csv_write2 (void *dest, size_t dest_size, const void *src, size_t src_size, unsigned char quote)
 {
+  if (src == NULL)
+	return 0;
+
   unsigned char *cdest = dest;
   const unsigned char *csrc = src;
-  size_t chars = 0;
 
-  if (src == NULL)
-    return 0;
+  size_t chars = 0;
 
   if (dest == NULL)
     dest_size = 0;
@@ -554,10 +558,11 @@ csv_write2 (void *dest, size_t dest_size, const void *src, size_t src_size, unsi
 int
 csv_fwrite2 (FILE *fp, const void *src, size_t src_size, unsigned char quote)
 {
+  if (fp == NULL || src == NULL)
+	return 0;
+
   const unsigned char *csrc = src;
 
-  if (fp == NULL || src == NULL)
-    return 0;
 
   if (fputc(quote, fp) == EOF)
     return EOF;
